@@ -5,3 +5,15 @@
 - flex布局
 - 原生js实现
 - 模拟数据
+
+```
+防止margin合并
+.noCollapse::after{
+  content:'';
+  display:table;
+}
+.noCollapse::before{
+  content:'';
+  display:table;
+}
+```
