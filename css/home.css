@@ -1,5 +1,9 @@
 /* red : D43C33*/
 
+body{
+	font-size: 15px;
+}
+/*头部样式*/
 section.topbar{
 	display: flex;
 	justify-content: space-between;
@@ -36,13 +40,90 @@ section.topbar > a::after{
 	transform-origin: 0 0;
 }
 
-section.globalTabs{
+
+/*tab css样式*/
+.tabs{
+	display: flex;
+	border-bottom: 1px solid #ccc;
+}
+.tabs>li{
+	width: 33.333333%;
+	text-align: center;
+	line-height: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.tabs > li >.text{
+	position: relative;
+	padding: 10px 5px;
+	top: 1px;
+}
+.tabs >li.active{
+	color: #D43C33;
+}
+.tabs > li.active>.text{
 
 }
+.tabs > li.active>.text::after{
+	content: '';
+	position: absolute;
+	height: 2px;
+	background: #D43C33;
+	bottom: 0;
+	/*bottom: 1px;*/
+	left: 1px;
+	width: 100%;
+}
+.tab-content > li{
+	display: none;
+}
+.tab-content > li.active{
+	display: block;	
+}
+
+
 
 section.playlists{
 
 }
+section.playlists h2{
+	border-left: 2px solid #D43C33;
+	font-size: 17px;
+	/*和字体一样高*/
+	line-height: 1;
+	padding-left: 8px;
+	margin: 20px 0 8px;
+}
+section.playlists > ol.songs{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	font-size: 13px;
+}
+
+section.playlists > ol.songs > li{
+	width: 32.8%;
+	/*display: flex 没有margin合并*/
+	margin: 8px 0;
+}
+section.playlists > ol.songs > li p{
+	/*多行省略号*/
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	line-height: 18px;
+	height: 36px;
+	padding: 0 6px;
+	font-size: 13px;
+}
+
+section.playlists > ol.songs > li img{
+	width: 100%;
+}
+
 
 section.songs{
 
@@ -51,3 +132,4 @@ section.songs{
 section.art{
 
 }
+
