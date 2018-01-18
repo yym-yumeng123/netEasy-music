@@ -277,11 +277,11 @@ section.art .copyright{
 	height: 50px;
     margin-left: 10px;
     padding-right: 10px;
-    font-size: 10px;
+    font-size: 15px;
     line-height: 50px;
     color: #507daf;
 }
-#searchResult>a>li{
+#searchResult>li{
 	height: 50px;
     margin-left: 10px;
     padding-right: 10px;

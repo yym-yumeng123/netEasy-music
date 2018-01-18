@@ -104,7 +104,7 @@ $("input.search-input").on('input',function(e){
 			$("#searchResult").empty()
 			//搜索没有结果
 			if (results.length === 0) {
-				$("#searchResult").html("没有结果")
+				$("#searchResult").text("没有结果")
 			}else{
 				//有结果
 				for (var i = 0; i < results.length; i++) {
