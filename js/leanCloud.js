@@ -64,7 +64,6 @@ query.find().then(function (results) {
 // 填充推荐歌单数据
 var queryS = new AV.Query('Playlist')
 queryS.find().then(function (result) {
-	console.log(result)
 	for (var i = 0; i < result.length; i++) {
 		let songImg = result[i].attributes
 		let liImg = `
@@ -80,3 +79,36 @@ queryS.find().then(function (result) {
 }, function (error) {
 	alert("获取歌曲失败")
 });
+
+//搜索
+$("input.search-input").on('input',function(e){
+	let $input = $(e.currentTarget)
+	let value = $input.val().trim()  // 防止输入空格
+	if (value === '') {return}
+	// 查询字符串
+	var query = new AV.Query('Song');
+	query.contains('name', value);
+
+	query.find().then(function (results) {
+		$("#searchResult").empty()
+		//搜索没有结果
+		if (results.length === 0) {
+			$("#searchResult").html("没有结果")
+		}else{
+			//有结果
+			for (var i = 0; i < results.length; i++) {
+	    		let song = results[i].attributes
+	    		let li = `
+					<li data-id="${results[i].id}">
+						<a href="song.html?id=${results[i].id}">
+							搜索"${song.name} - ${song.singer}"
+						</a>
+					</li>
+	    		`
+	    		$('#searchResult').append(li)
+	    	}
+		}
+    	
+	});
+})
+
