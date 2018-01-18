@@ -1,4 +1,7 @@
-# netEasy-music
+### 链接二维码
+![](https://i.loli.net/2018/01/18/5a605e4728bb4.png)
+
+### netEasy-music
 网易云音乐移动端
 
 - 百分百像素级还原
