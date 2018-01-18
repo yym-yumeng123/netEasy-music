@@ -11,6 +11,10 @@ body{
 	padding-left: 8px;
 	margin: 20px 0 8px;
 }
+.square-spin{
+	width: 50px;
+	margin: 0 auto;
+}
 
 /*头部固定*/
 .sticky{
