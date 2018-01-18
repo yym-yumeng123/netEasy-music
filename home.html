@@ -36,43 +36,8 @@
 				<!-- 推荐歌单 -->
 				<section class="playlists">
 					<h2 class="sectionTitle">推荐歌单</h2>
-					<ol class="songs">
-						<li>
-							<div class="cover">
-								<img src="https://i.loli.net/2018/01/17/5a5f0d6b8d087.jpg" alt="我的封面">
-							</div>
-							<p>愿有人待你如初疼你入骨，深情永不辜负</p>
-						</li>
-						<li>
-							<div class="cover">
-								<img src="https://i.loli.net/2018/01/17/5a5f0d6b8d087.jpg" alt="我的封面">
-							</div>
-							<p>粤语女声：故事太多，没人会听你诉说</p>
-						</li>
-						<li>
-							<div class="cover">
-								<img src="https://i.loli.net/2018/01/17/5a5f0d6b8d087.jpg" alt="我的封面">
-							</div>
-							<p>百部动画原声｜百首轻松小调</p>
-						</li>
-						<li>
-							<div class="cover">
-								<img src="https://i.loli.net/2018/01/17/5a5f0d6b8d087.jpg" alt="我的封面">
-							</div>
-							<p>『古风百合』剧情歌/女女对唱</p>
-						</li>
-						<li>
-							<div class="cover">
-								<img src="https://i.loli.net/2018/01/17/5a5f0d6b8d087.jpg" alt="我的封面">
-							</div>
-							<p>两行文字两行文字两行文字两行文字</p>
-						</li>
-						<li>
-							<div class="cover">
-								<img src="https://i.loli.net/2018/01/17/5a5f0d6b8d087.jpg" alt="我的封面">
-							</div>
-							<p>两行文字两行文字两行文字两行文字</p>
-						</li>
+					<ol id="song-img" class="songs">
+						<!-- 歌单列表 -->
 					</ol>
 				</section>
 				<!-- 最新音乐 -->
@@ -99,53 +64,32 @@
 					</div>
 				</section>
 			</li>
-			<li class="page-2">第二页</li>
-			<li class="page-3">第三页</li>
+			<li class="page-hotSong">第二页</li>
+			<!-- 搜索 -->
+			<li class="page-search">
+				<form action="#" class="inputK">
+					<div class="searchIn">
+						<svg class="icon icon-sousuo">
+						    <use xlink:href="#icon-sousuo"></use>
+						</svg>
+						<input class="search-input" type="text" placeholder="搜索歌曲、 歌手、 专辑" value>
+					</div>
+					<ol id="searchResult"></ol>
+				</form>
+			</li>
 		</ol>
 		
 	</div>
+	<!-- 注意引入顺序 -->
 	<!-- 引入字体图标 -->
 	<script src="//at.alicdn.com/t/font_429186_st29x7u3sd04fgvi.js"></script>
-	<!-- 引入数据库存储 -->
-	<script src="vendors/av-min.js"></script>
-	<!-- 引入数据 -->
-	<script src="js/av.js"></script>
 	<!-- 引入jquery -->
 	<script src="vendors/jquery.min.js"></script>
-	<!-- 引入tab.js -->
+	<!-- 引入数据库存储 -->
+	<script src="vendors/av-min.js"></script>
+	<!-- 引入tab选项卡 -->
 	<script src="js/tab.js"></script>
-
-	<script>
-		let $olSongs = $("ol#songs")
-		// 使用数据
-		var query = new AV.Query('Song');
-		query.find().then(function (results) {
-			// loading加载成功干掉
-			$("#songs-loading").remove()
-			for (var i = 0; i < results.length; i++) {
-				let song = results[i].attributes
-				console.log(song)
-				let li = `
-					<li>
-						<h3>${song.name}</h3>
-						<p>
-							<svg class="icon icon-sq">
-								<use xlink:href="#icon-sq"></use>
-							</svg>
-							${song.singer}-${song.name}
-						</p>
-						<a class="playButton" href="#">
-							<svg class="icon icon-play">
-								<use xlink:href="#icon-play"></use>
-							</svg>
-						</a>
-					</li>
-				`
-				$olSongs.append(li)
-			}
-		}, function (error) {
-			alert("获取歌曲失败")
-		});
-	</script>
+	<!-- leanCloud服务器使用 -->
+	<script src="js/leanCloud.js"></script>
 </body>
 </html>

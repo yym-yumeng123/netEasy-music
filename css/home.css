@@ -231,3 +231,62 @@ section.art .copyright{
 	transform: scale(.75);
 	color: #888;
 }
+
+
+
+
+/*搜索*/
+.page-search form{
+	position: relative;
+	padding: 15px 10px;
+}
+
+.page-search .searchIn{
+    position: relative;
+    width: 100%;
+    height: 30px;
+    padding: 0 30px;
+    box-sizing: border-box;
+    background: #ebecec;
+    border-radius: 30px;
+}
+
+.page-search .search-input{
+	border: none;
+	width: 100%;
+    height: 30px;
+    line-height: 18px;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+}
+.searchIn .icon-sousuo{
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	width: 18px;
+    height: 18px;
+}
+
+.search-input::-webkit-input-placeholder{
+    font-family: Helvetica, sans-serif;
+    color: #c9c9c9;
+}
+#searchResult{
+	height: 50px;
+    margin-left: 10px;
+    padding-right: 10px;
+    font-size: 10px;
+    line-height: 50px;
+    color: #507daf;
+}
+#searchResult>a>li{
+	height: 50px;
+    margin-left: 10px;
+    padding-right: 10px;
+    font-size: 15px;
+    line-height: 50px;
+    color: #507daf;
+    border-bottom: 1px solid #e7dede; 
+}
