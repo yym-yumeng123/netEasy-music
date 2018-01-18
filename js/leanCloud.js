@@ -80,35 +80,46 @@ queryS.find().then(function (result) {
 	alert("获取歌曲失败")
 });
 
-//搜索
-$("input.search-input").on('input',function(e){
-	let $input = $(e.currentTarget)
-	let value = $input.val().trim()  // 防止输入空格
-	if (value === '') {return}
-	// 查询字符串
-	var query = new AV.Query('Song');
-	query.contains('name', value);
 
-	query.find().then(function (results) {
-		$("#searchResult").empty()
-		//搜索没有结果
-		if (results.length === 0) {
-			$("#searchResult").html("没有结果")
-		}else{
-			//有结果
-			for (var i = 0; i < results.length; i++) {
-	    		let song = results[i].attributes
-	    		let li = `
-					<li data-id="${results[i].id}">
-						<a href="song.html?id=${results[i].id}">
-							搜索"${song.name} - ${song.singer}"
-						</a>
-					</li>
-	    		`
-	    		$('#searchResult').append(li)
-	    	}
-		}
-    	
-	});
+
+//搜索
+// 设置定时器
+let timer = null
+$("input.search-input").on('input',function(e){
+	//函数节流
+	if (timer) {window.clearTimeout(timer)}
+	timer = setTimeout(function(){
+		let $input = $(e.currentTarget)
+		let value = $input.val().trim()  // 防止输入空格
+		// 如果输入空字符串,直接返回
+		if (value === '') {return}
+		// 查询字符串,or 组合查询
+		var queryName = new AV.Query('Song');
+		queryName.contains('name', value);
+		var querySinger = new AV.Query('Song')
+		querySinger.contains('singer', value);
+		var query = AV.Query.or(queryName,querySinger)
+		//显示查找结果
+		query.find().then(function (results) {
+			$("#searchResult").empty()
+			//搜索没有结果
+			if (results.length === 0) {
+				$("#searchResult").html("没有结果")
+			}else{
+				//有结果
+				for (var i = 0; i < results.length; i++) {
+		    		let song = results[i].attributes
+		    		let li = `
+						<li data-id="${results[i].id}">
+							<a href="song.html?id=${results[i].id}">
+								搜索 "${song.name} - ${song.singer}"
+							</a>
+						</li>
+		    		`
+		    		$('#searchResult').append(li)
+		    	}
+			}	
+		});
+	},400)
 })
 
