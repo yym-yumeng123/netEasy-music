@@ -35,7 +35,7 @@ AV.Query.doCloudQuery(cql).then(function (data) {
 		let song = results[i].attributes
 		let li = `
 			<li>
-				<a class="playButton" href="../song.html?id=${results[i].id}">
+				<a class="playButton" href="song.html?id=${results[i].id}">
 					<h3>${song.name}</h3>
 					<p>
 						<svg class="icon icon-sq">
@@ -91,7 +91,7 @@ AV.Query.doCloudQuery(cqh).then(function (data) {
         let song = results[i].attributes
         let Li = `
 			<li>
-				<a class="playButton" href="../song.html?id=${results[i].id}">
+				<a class="playButton" href="song.html?id=${results[i].id}">
 					<h3>${song.name}</h3>
 					<p>
 						<svg class="icon icon-sq">
