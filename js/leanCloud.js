@@ -35,7 +35,7 @@ AV.Query.doCloudQuery(cql).then(function (data) {
 		let song = results[i].attributes
 		let li = `
 			<li>
-				<a class="playButton" href="../song.html?id=${results[i].id}">
+				<a class="playButton" href="./song.html?id=${results[i].id}">
 					<h3>${song.name}</h3>
 					<p>
 						<svg class="icon icon-sq">
@@ -90,8 +90,8 @@ AV.Query.doCloudQuery(cqh).then(function (data) {
     for(var i = 0;i<results.length;i++){
         let song = results[i].attributes
         let Li = `
-			<li>
-				<a class="playButton" href="../song.html?id=${results[i].id}">
+            <li>
+				<a class="playButton" href="./song.html?id=${results[i].id}">
 					<h3>${song.name}</h3>
 					<p>
 						<svg class="icon icon-sq">
@@ -100,6 +100,7 @@ AV.Query.doCloudQuery(cqh).then(function (data) {
 						${song.singer}-${song.name}
 					</p>
 						<span class="click">
+
 							<svg class="icon icon-play">
 								<use xlink:href="#icon-play"></use>
 							</svg>
@@ -165,7 +166,7 @@ query.find().then(function (results) {
 		let song = results[i].attributes
 		let li = `
 			<li class="item">
-    			<a href="song.html?id=${results[i].id}">${song.name}</a>
+    			<a href="./song.html?id=${results[i].id}">${song.name}</a>
     		</li>
 		`
 		$list.append(li)
