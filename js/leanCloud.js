@@ -54,6 +54,7 @@ AV.Query.doCloudQuery(cql).then(function (data) {
 }, function (error) {
 	alert("获取歌曲失败")
 });
+
 // 填充推荐歌单数据
 var queryS = new AV.Query('Playlist')
 queryS.find().then(function (result) {
@@ -74,8 +75,6 @@ queryS.find().then(function (result) {
 	alert("获取歌曲失败")
 });
 
-
-
 // 热歌榜
 let $song = $("#olSongs")
 // 在线获取热歌榜
@@ -87,7 +86,6 @@ AV.Query.doCloudQuery(cqh).then(function (data) {
     console.log(results)
     for(var i = 0;i<results.length;i++){
         let song = results[i].attributes
-        console.log(1)
         let Li = `
             <li>
 				<h3>${song.name}</h3>
@@ -104,13 +102,9 @@ AV.Query.doCloudQuery(cqh).then(function (data) {
 				</a>
 			</li>
         `
-        console.log(2)
-        console.log(Li)
         $song.append(Li)
     }
 })
-
-
 
 //搜索
 // 设置定时器
