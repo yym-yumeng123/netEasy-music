@@ -160,7 +160,7 @@ query.find().then(function (results) {
 		let song = results[i].attributes
 		let li = `
 			<li class="item">
-    			<a href="#">${song.name}</a>
+    			<a href="song.html?id=${results[i].id}">${song.name}</a>
     		</li>
 		`
 		$list.append(li)
