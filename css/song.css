@@ -16,9 +16,9 @@
 .page::before{
 	content: '';
 	position: absolute;
-	top: -10px;
-	left: -10px;
-	width: 100%;
+	top: 0px;
+	left: -5px;
+	width: 104%;
 	height: 100%;
 	height: 100vh;
 	z-index: -1;
