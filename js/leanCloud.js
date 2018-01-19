@@ -1,14 +1,4 @@
 
-
-//初始化
-var APP_ID = 'eNuy1gIwgY9cI6KeKsGfw3Mr-gzGzoHsz';
-var APP_KEY = 'DX4tkQ07mmA8cQHGujuTa6aT';
-
-AV.init({
-  appId: APP_ID,
-  appKey: APP_KEY
-});
-
 //最新音乐加载
 // var SongObject = AV.Object.extend('Song');  // 选择表名
 // var songOBject = new SongObject();  // 生成一条数据
@@ -33,9 +23,12 @@ AV.init({
 
 let $olSongs = $("ol#songs")
 let $songImg =$("ol#song-img") 
+let $list = $(".hotlist .list")
 // 使用数据
 var query = new AV.Query('Song');
-query.find().then(function (results) {
+var cql = 'select * from Song where hotsong != true';   // CQL  查询
+AV.Query.doCloudQuery(cql).then(function (data) {
+	let results = data.results;
 	// loading加载成功干掉
 	$("#songs-loading").remove()
 	for (var i = 0; i < results.length; i++) {
@@ -49,7 +42,7 @@ query.find().then(function (results) {
 					</svg>
 					${song.singer}-${song.name}
 				</p>
-				<a class="playButton" href="#">
+				<a class="playButton" href="../song.html?id=${results[i].id}">
 					<svg class="icon icon-play">
 						<use xlink:href="#icon-play"></use>
 					</svg>
@@ -64,6 +57,7 @@ query.find().then(function (results) {
 // 填充推荐歌单数据
 var queryS = new AV.Query('Playlist')
 queryS.find().then(function (result) {
+	$("#songs-loading").remove()
 	for (var i = 0; i < result.length; i++) {
 		let songImg = result[i].attributes
 		let liImg = `
@@ -79,6 +73,42 @@ queryS.find().then(function (result) {
 }, function (error) {
 	alert("获取歌曲失败")
 });
+
+
+
+// 热歌榜
+let $song = $("#olSongs")
+// 在线获取热歌榜
+var hotQuery = new AV.Query('Song');
+var cqh = 'select * from Song where hotsong = true';
+AV.Query.doCloudQuery(cqh).then(function (data) {
+	$("#songs-loading").remove()
+    let results = data.results;
+    console.log(results)
+    for(var i = 0;i<results.length;i++){
+        let song = results[i].attributes
+        console.log(1)
+        let Li = `
+            <li>
+				<h3>${song.name}</h3>
+				<p>
+					<svg class="icon icon-sq">
+						<use xlink:href="#icon-sq"></use>
+					</svg>
+					${song.singer}-${song.name}
+				</p>
+				<a class="playButton" href="../song.html?id=${results[i].id}">
+					<svg class="icon icon-play">
+						<use xlink:href="#icon-play"></use>
+					</svg>
+				</a>
+			</li>
+        `
+        console.log(2)
+        console.log(Li)
+        $song.append(Li)
+    }
+})
 
 
 
@@ -104,7 +134,14 @@ $("input.search-input").on('input',function(e){
 			$("#searchResult").empty()
 			//搜索没有结果
 			if (results.length === 0) {
-				$("#searchResult").text("没有结果")
+				let li = `
+						<li>
+							<a href="#">
+								搜索 "没有结果"
+							</a>
+						</li>
+		    		`
+		    	$('#searchResult').append(li)
 			}else{
 				//有结果
 				for (var i = 0; i < results.length; i++) {
@@ -123,3 +160,17 @@ $("input.search-input").on('input',function(e){
 	},400)
 })
 
+var query = new AV.Query('Song');
+query.find().then(function (results) {
+	for (var i = 0; i < results.length; i++) {
+		let song = results[i].attributes
+		let li = `
+			<li class="item">
+    			<a href="#">${song.name}</a>
+    		</li>
+		`
+		$list.append(li)
+	}
+}, function (error) {
+	alert("获取歌曲失败")
+});

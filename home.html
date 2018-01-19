@@ -8,6 +8,16 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/home.css">
 	<link rel="stylesheet" href="vendors/loaders.min.css">
+	<script>
+		// 动态rem
+        document.write(`
+          <style>
+            html{
+              font-size: ${document.documentElement.clientWidth/10}px;
+            }
+          </style>
+        `)
+    </script>
 </head>
 <body>
 	<div class="page">
@@ -38,6 +48,7 @@
 					<h2 class="sectionTitle">推荐歌单</h2>
 					<ol id="song-img" class="songs">
 						<!-- 歌单列表 -->
+						<div id="songs-loading" class="square-spin"><div></div></div>
 					</ol>
 				</section>
 				<!-- 最新音乐 -->
@@ -64,7 +75,23 @@
 					</div>
 				</section>
 			</li>
-			<li class="page-hotSong">第二页</li>
+			<li class="page-hotSong">
+				<div class="hotBanner">
+	                <img src="http://oxkl41ihc.bkt.clouddn.com/d6c04639gy1fkhm5abm5sj207v03pgll.jpg" alt="">
+	                <p><small>更新日期：12月21日</small></p>
+	            </div>
+            	<ol id="olSongs" class="list">
+					<!-- 歌曲列表 -->
+					<div id="songs-loading" class="square-spin"><div></div></div>
+				</ol>
+
+                
+                <div class="list-more">
+                	<a href="#">查看完整榜单 &gt;</a>
+                </div>
+			</li>
+
+
 			<!-- 搜索 -->
 			<li class="page-search">
 				<form action="#" class="inputK">
@@ -74,19 +101,30 @@
 						</svg>
 						<input class="search-input" type="text" placeholder="搜索歌曲、 歌手、 专辑" value>
 					</div>
-					<ol id="searchResult"></ol>
+					<ol id="searchResult"></ol>      
 				</form>
+				<div class="hotlist">
+					<h3 class="title">热门搜索</h3>
+	            	<ul class="list">
+	            		<!-- <li class="item">
+	            			<a href="#">普通人</a>
+	            		</li> -->
+	            	</ul>		     
+	            </div> 
 			</li>
 		</ol>
 		
 	</div>
 	<!-- 注意引入顺序 -->
+
 	<!-- 引入字体图标 -->
 	<script src="//at.alicdn.com/t/font_429186_st29x7u3sd04fgvi.js"></script>
 	<!-- 引入jquery -->
 	<script src="vendors/jquery.min.js"></script>
 	<!-- 引入数据库存储 -->
 	<script src="vendors/av-min.js"></script>
+	<!-- 初始化 -->
+	<script src="js/av.js"></script>
 	<!-- 引入tab选项卡 -->
 	<script src="js/tab.js"></script>
 	<!-- leanCloud服务器使用 -->
