@@ -16,6 +16,14 @@
 		</section>
 		<!-- 黑胶唱片 -->
 		<section class="disk">
+			<div class="icon-wrapper">	
+				<svg class="iconfont icon-bofang">
+			 		<use xlink:href="#icon-bofang"></use>
+				</svg>
+				<svg class="iconfont icon-pause">
+				 	<use xlink:href="#icon-pause"></use>
+				</svg>
+		 	</div>
 			<div class="circle">
 				<img src="//i.loli.net/2017/10/08/59da11c6739ab.jpg" alt="封面">
 			</div>
@@ -42,39 +50,11 @@
 		</section>
 
 	</div>
+	<script src="//at.alicdn.com/t/font_429186_st29x7u3sd04fgvi.js"></script>
 	<!-- 引入jquery -->
 	<script src="vendors/jquery.min.js"></script>
 	<script src="vendors/av-min.js"></script>
 	<script src="js/av.js"></script>
-	<!-- 获取ip的id -->
-	<script>
-		function getParameterByName(name, url) {
-		    if (!url) url = window.location.href;
-		    name = name.replace(/[\[\]]/g, "\\$&");
-		    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-		        results = regex.exec(url);
-		    if (!results) return null;
-		    if (!results[2]) return '';
-		    return decodeURIComponent(results[2].replace(/\+/g, " "));
-		}
-	</script>
-	<script>
-		let id = getParameterByName('id');
-
-		var query = new AV.Query('Song');
-  		query.get(id).then(function(song){
-  			// 解构获取歌曲url
-  			let {url} = song.attributes
-  			let audio = document.createElement("audio")
-  			audio.src = url
-  			console.log(url)
-  			audio.oncanplay = function(){
-  				audio.play()
-  			}
-
-
-  		})
-	</script>
-
+	<script src="js/song.js"></script>
 </body>
 </html>

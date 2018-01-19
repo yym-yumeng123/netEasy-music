@@ -35,17 +35,20 @@ AV.Query.doCloudQuery(cql).then(function (data) {
 		let song = results[i].attributes
 		let li = `
 			<li>
-				<h3>${song.name}</h3>
-				<p>
-					<svg class="icon icon-sq">
-						<use xlink:href="#icon-sq"></use>
-					</svg>
-					${song.singer}-${song.name}
-				</p>
 				<a class="playButton" href="../song.html?id=${results[i].id}">
-					<svg class="icon icon-play">
-						<use xlink:href="#icon-play"></use>
-					</svg>
+					<h3>${song.name}</h3>
+					<p>
+						<svg class="icon icon-sq">
+							<use xlink:href="#icon-sq"></use>
+						</svg>
+						${song.singer}-${song.name}
+					</p>
+						<span class="click">
+
+							<svg class="icon icon-play">
+								<use xlink:href="#icon-play"></use>
+							</svg>
+						</span>
 				</a>
 			</li>
 		`
@@ -87,18 +90,20 @@ AV.Query.doCloudQuery(cqh).then(function (data) {
     for(var i = 0;i<results.length;i++){
         let song = results[i].attributes
         let Li = `
-            <li>
-				<h3>${song.name}</h3>
-				<p>
-					<svg class="icon icon-sq">
-						<use xlink:href="#icon-sq"></use>
-					</svg>
-					${song.singer}-${song.name}
-				</p>
+			<li>
 				<a class="playButton" href="../song.html?id=${results[i].id}">
-					<svg class="icon icon-play">
-						<use xlink:href="#icon-play"></use>
-					</svg>
+					<h3>${song.name}</h3>
+					<p>
+						<svg class="icon icon-sq">
+							<use xlink:href="#icon-sq"></use>
+						</svg>
+						${song.singer}-${song.name}
+					</p>
+						<span class="click">
+							<svg class="icon icon-play">
+								<use xlink:href="#icon-play"></use>
+							</svg>
+						</span>
 				</a>
 			</li>
         `

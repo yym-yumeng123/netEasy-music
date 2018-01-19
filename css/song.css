@@ -7,6 +7,8 @@
 	}
 }
 
+
+
 .page{
 	display: flex;
 	flex-direction: column;
@@ -46,6 +48,7 @@ section.pointer .point{
 }
 
 section.disk{
+	position: relative;
 	margin-top: 63px;
 }
 section.disk .circle{
@@ -57,6 +60,32 @@ section.disk .circle{
 	justify-content: center;
 	align-items: center;*/
 }
+.icon-wrapper{
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	z-index: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 1px solid #fff;
+	border-radius: 50%;
+	padding: 7px;
+}
+.icon-wrapper .iconfont{
+	width: 25px;
+	height: 25px;
+	vertical-align: -0.15em;
+	overflow: hidden;
+	fill: #fff;
+}
+section.disk .icon-pause{ display: none; }
+section.disk.playing .icon-bofang{display: none;}
+section.disk.playing .icon-pause{display: block;}
+
+
+
 section.disk .circle::before{
 	content: '';
 	position: absolute;
