@@ -122,6 +122,13 @@ section.disk.playing .circle > img{
 	animation: circle 20s infinite linear;
 }
 
+/*随时随地停止*/
+section.disk.pause .circle::after,
+section.disk.pause .circle > img{
+	animation: circle 20s infinite linear;
+	animation-play-state: paused;
+}
+
 /*歌词*/
 section.lyric{
 	/*占据中间*/

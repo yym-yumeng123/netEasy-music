@@ -28,7 +28,7 @@ filter: blur(100px) brightness(.2);
 ```
 
 
-问题待修改:
+遇到问题待修改:
 1. 网速慢时图片闪烁
 2. 使用函数节流,减少搜索时请求次数
 3. transform动画是否会覆盖以前的transform
@@ -48,3 +48,4 @@ as appropriate to mark resolution, or use 'git commit -a'
 注意：
 git merge会形成MERGE-HEAD(FETCH-HEAD) 。git push会形成HEAD这样的引用。HEAD代表本地最近成功push后形成的引用。
 ```
+5. 填数据时js里a的链接相对于html写的,没有考虑是填充后的路径
