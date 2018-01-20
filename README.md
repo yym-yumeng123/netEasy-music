@@ -49,3 +49,5 @@ as appropriate to mark resolution, or use 'git commit -a'
 git merge会形成MERGE-HEAD(FETCH-HEAD) 。git push会形成HEAD这样的引用。HEAD代表本地最近成功push后形成的引用。
 ```
 5. 填数据时js里a的链接相对于html写的,没有考虑是填充后的路径
+6. 背景图片写在了伪类,添加动态数据问题
+7. 歌词lyric 需要回车,去掉\n
