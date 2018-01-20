@@ -9,6 +9,7 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
+
 let id = getParameterByName('id');
 var query = new AV.Query('Song');
 query.get(id).then(function(song){
@@ -16,13 +17,31 @@ query.get(id).then(function(song){
 	let {url,lyric,cover,name,singer} = song.attributes
 
 
+	imagesInit.call(undefined,cover)
 	initPlayer.call(undefined,url)
 	initText(name,lyric)
 })
+
+// 歌词数据
 function initText(name,lyric){
 	$('.lyric > h1').text(name)
 	parseLyric(lyric)
 }
+
+function imagesInit(cover) {
+    // $('.page:before').css({
+    //     "background": 'transparent url('+ cover +') no-repeat'
+    // });
+    
+    document.querySelector('#bg').src = cover;
+}
+
+
+
+
+	
+
+
 // 初始化暂停播放
 function initPlayer(url){
 	let audio = document.createElement("audio")
@@ -44,24 +63,28 @@ function initPlayer(url){
 	})
 }
 
+//歌词
 function parseLyric(lyric){
-	let parts = lyric.split("\n")
-
-	let regex = /^\[(.+)\](.*)$/;
-	parts = parts.map(function(string,index){
+	//解构
+	let array = lyric.split('\n')
+	// 正则匹配分开时间[ ]和歌词
+	let regex = /^\[(.+)\](.*)$/
+	//遍历数组,得到时间和歌词
+	array = array.map(function(string,index){
 		let matches = string.match(regex)
 		if (matches) {
-			return {
-				time: matches[1],
-				words: matches[2]
-			}
+			return {time:matches[1],words:matches[2]}
 		}
 	})
-	let $word= $('.word')
+	let $lyric = $('.word')
 	array.map(function(object){
+		// 创建p标签
+		
 		if (!object) {return}
 		let $p = $('<p/>')
-		$p.attr('data-time,object.time').text(object.words)
+		//给每一个标签自定义时间属性,然后的文本内容是words
+		$p.attr('data-time',object.time).text(object.words)
+		//插入div
 		$p.appendTo($lyric.children('.lines'))
 	})
 }
