@@ -24,10 +24,11 @@
 	height: 100%;
 	height: 100vh;
 	z-index: -1;
-	background:transparent url(//i.loli.net/2017/10/08/59da11c6739ab.jpg)no-repeat center;
-	background-size: cover;
+	/*background:transparent url(//i.loli.net/2017/10/08/59da11c6739ab.jpg)no-repeat center;
+	background-size: cover;*/
 	filter: blur(5px) brightness(.4);
 }
+
 section.pointer{
 	position: relative;
 }

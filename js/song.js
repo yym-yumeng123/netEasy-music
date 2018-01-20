@@ -29,10 +29,9 @@ function initText(name,lyric){
 }
 
 function imagesInit(cover) {
-    // $('.page:before').css({
-    //     "background": 'transparent url('+ cover +') no-repeat'
-    // });
-    
+ 	// 添加css伪类
+     var s="<style type='text/css' > .page::before{ background:transparent url(\""+cover+"\")no-repeat center;background-size: cover; } </style>";
+     $('head').append(s)
     document.querySelector('#bg').src = cover;
 }
 
