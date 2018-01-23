@@ -24,6 +24,7 @@ query.get(id).then(function(song){
 
 // 歌词数据
 function initText(name,lyric){
+	console.log(lyric)
 	$('.lyric > h1').text(name)
 	parseLyric(lyric)
 }
@@ -35,10 +36,6 @@ function imagesInit(cover) {
     document.querySelector('#bg').src = cover;
 }
 
-
-
-
-	
 
 
 // 初始化暂停播放
@@ -66,19 +63,26 @@ function initPlayer(url){
 function parseLyric(lyric){
 	//解构
 	let array = lyric.split('\n')
+	// console.log(array)
 	// 正则匹配分开时间[ ]和歌词
-	let regex = /^\[(.+)\](.*)$/
+	// let regex = /^\[(.+)\](.*)$/
+	let regex = /^\[(.+)\](.+)/
 	//遍历数组,得到时间和歌词
 	array = array.map(function(string,index){
+		// console.log("array....")
+		// console.log(array)
 		let matches = string.match(regex)
+		// console.log("matches....")
+		// console.log(matches)
 		if (matches) {
 			return {time:matches[1],words:matches[2]}
 		}
 	})
+	console.log(11)
+	console.log(array)
 	let $lyric = $('.word')
 	array.map(function(object){
 		// 创建p标签
-		
 		if (!object) {return}
 		let $p = $('<p/>')
 		//给每一个标签自定义时间属性,然后的文本内容是words

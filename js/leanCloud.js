@@ -86,7 +86,6 @@ var cqh = 'select * from Song where hotsong = true';
 AV.Query.doCloudQuery(cqh).then(function (data) {
 	$("#songs-loading").remove()
     let results = data.results;
-    console.log(results)
     for(var i = 0;i<results.length;i++){
         let song = results[i].attributes
         let Li = `
