@@ -31,6 +31,7 @@
 
 section.pointer{
 	position: relative;
+
 }
 section.pointer .logo{
 	position: absolute;
@@ -46,6 +47,13 @@ section.pointer .point{
 	position: absolute;
 	left: 45%;
 	z-index: 2;
+	transform-origin: 10% 0%;
+	transition: 1s;
+}
+section.pointer .point.rotate{
+	transform: rotate(-15deg);
+    transform-origin: 10% 0%;
+    transition: transform 1s;
 }
 
 section.disk{
@@ -190,4 +198,9 @@ section.links a{
 section.links a.main{
 	background: #d33a31;
 	color: #fff;
+}
+
+.boomText{
+	opacity: 0;
+	display: inline-block;
 }

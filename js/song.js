@@ -75,11 +75,13 @@ function initPlayer(url){
 		audio.pause()
 		$('section.disk').removeClass('playing')
 		$('section.disk').addClass('pause')
+		$('section.pointer .point').addClass('rotate')
 	})
 	$(".icon-bofang").on('click',function(){
 		audio.play()
 		$('section.disk').addClass('playing')
 		$('section.disk').removeClass('pause')
+		$('section.pointer .point').removeClass('rotate')
 	})
 	//歌词动画
 	setInterval(function(){
@@ -89,11 +91,14 @@ function initPlayer(url){
 		let time = `${pad(munites)}:${pad(left)}`;  // 问题: 不能分开
 
 		let $lines = $('.lines>p')
+
 		let $whichline 
 		for (let i = 0; i < $lines.length; i++) {
 			// 歌曲时间
 			let currentLine = $lines.eq(i).attr('data-time')
 		 	let nextLine = $lines.eq(i + 1).attr('data-time')
+
+		
 
 			if ($lines.eq(i+1).length !== 0 && currentLine < time && nextLine > time) {
 		 		$whichline = $lines.eq(i)
@@ -107,7 +112,9 @@ function initPlayer(url){
 			let top = $whichline.offset().top
 			let linesTop = $('.lines').offset().top
 			let delta = top - linesTop - $('.word').height()/3
+
 			$('.lines').css('transform', `translateY(-${delta}px)`)
+
 		}
 	},300)
 }
@@ -115,9 +122,3 @@ function initPlayer(url){
 function pad(num){
 	return num >= 10 ? num + '' : '0' + num
 }
-
-
-/*
-1. 这次滚动的时机
-
- */
