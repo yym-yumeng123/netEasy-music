@@ -57,9 +57,9 @@ filter: blur(100px) brightness(.2);
 
 
 
-遇到问题待修改:
+遇到问题解决方法:
 1. 网速慢时图片闪烁
-2. 使用函数节流,减少搜索时请求次数
+2. 搜索网络请求过多,使用函数节流,减少搜索时请求次数
 3. transform动画是否会覆盖以前的transform
 4. git问题
 ```
@@ -78,13 +78,14 @@ as appropriate to mark resolution, or use 'git commit -a'
 git merge会形成MERGE-HEAD(FETCH-HEAD) 。git push会形成HEAD这样的引用。HEAD代表本地最近成功push后形成的引用。
 ```
 5. 填数据时js里a的链接相对于html写的,没有考虑是填充后的路径
-6. 背景图片写在了伪类,添加动态数据问题
+6. 背景图片写在了伪类,添加动态数据问题,
 7. 歌词lyric 需要回车,去掉\n
+8. ~~ 去掉小数部分,保留整数部分 把小数变成整数
+9. 歌词滚动问题css写好不做动画,解决方法是细节问题
 
 
 
-
-### 3. 歌曲播放页
+### 歌曲播放页
 
 1. **歌曲播放页disc唱片部分的播放/暂停动画**，主要使用了CSS3的`animation`实现，特别是`animation-play-state`的使用。不过，**这里有一个小bug**,即**在ios上的webkit内核浏览器中(例如：safari,chrome)，`-webkit-animation-play-state:paused`不起作用**，也就是说，动画会一直进行下去，即使按了暂停按钮。当然，可以用jQuery的addClass/removeClass方法配合CSS3的`.no-animation{-webkit-animation:none!important;}`样式解决这个bug,但是这又会产生新的问题，即点击暂停，动画此时可以暂停；但是当再次点击播放时，动画就会重新开始，而不是接着之前的状态继续。所以这两种方法都不太完美。这里我选用了第一种方法。
 2. **歌曲播放页disc指针部分的播放/暂停动画**，主要使用了CSS3的`transform`实现，特别是`transform：rotate()`的使用。但是transform属性默认是以`transform-origin:50% 50%`为固定点进行旋转。而这里**需要以disc指针的顶部为固定点进行旋转**，所以应设置其样式为`transform-origin:left top;`。

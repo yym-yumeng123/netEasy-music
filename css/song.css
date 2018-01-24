@@ -156,8 +156,12 @@ section.lyric .word p{
 	line-height: 24px;
 	color: hsla(0,0%,100%,.6);
 }
+section.lyric .word .lines{
+	transition: transform .3s;
+}
 section.lyric .lines p.active{
 	color: #fefefe;
+	font-size: 15px;
 }
 
 

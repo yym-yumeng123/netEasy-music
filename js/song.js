@@ -24,7 +24,6 @@ query.get(id).then(function(song){
 
 // 歌词数据
 function initText(name,lyric){
-	console.log(lyric)
 	$('.lyric > h1').text(name)
 	parseLyric(lyric)
 }
@@ -36,7 +35,32 @@ function imagesInit(cover) {
     document.querySelector('#bg').src = cover;
 }
 
+//歌词
+function parseLyric(lyric){
+	//解构
+	let array = lyric.split('\n')
 
+	// 正则匹配分开时间[ ]和歌词
+	// let regex = /^\[(.+)\](.*)$/
+	let regex = /^\[(.+)\](.+)/
+	//遍历数组,得到时间和歌词
+	array = array.map(function(string,index){
+		let matches = string.match(regex)
+		if (matches) {
+			return {time:matches[1],words:matches[2]}
+		}
+	})
+	let $lyric = $('.word')
+	array.map(function(object){
+		// 创建p标签
+		if (!object) {return}
+		let $p = $('<p></p>')
+		//给每一个标签自定义时间属性,然后的文本内容是words
+		$p.attr('data-time',object.time).text(object.words)
+		//插入div
+		$p.appendTo($lyric.children('.lines'))
+	})
+}
 
 // 初始化暂停播放
 function initPlayer(url){
@@ -57,37 +81,43 @@ function initPlayer(url){
 		$('section.disk').addClass('playing')
 		$('section.disk').removeClass('pause')
 	})
+	//歌词动画
+	setInterval(function(){
+		let seconds = audio.currentTime
+		let munites = ~~ (seconds / 60)
+		let left = seconds - munites *60
+		let time = `${pad(munites)}:${pad(left)}`;  // 问题: 不能分开
+
+		let $lines = $('.lines>p')
+		let $whichline 
+		for (let i = 0; i < $lines.length; i++) {
+			// 歌曲时间
+			let currentLine = $lines.eq(i).attr('data-time')
+		 	let nextLine = $lines.eq(i + 1).attr('data-time')
+
+			if ($lines.eq(i+1).length !== 0 && currentLine < time && nextLine > time) {
+		 		$whichline = $lines.eq(i)
+		 		break
+			}
+		}
+		if ($whichline) {
+			//高亮
+			$whichline.addClass('active').prev().removeClass('active')
+			//高度计算往上移动距离
+			let top = $whichline.offset().top
+			let linesTop = $('.lines').offset().top
+			let delta = top - linesTop - $('.word').height()/3
+			$('.lines').css('transform', `translateY(-${delta}px)`)
+		}
+	},300)
 }
 
-//歌词
-function parseLyric(lyric){
-	//解构
-	let array = lyric.split('\n')
-	// console.log(array)
-	// 正则匹配分开时间[ ]和歌词
-	// let regex = /^\[(.+)\](.*)$/
-	let regex = /^\[(.+)\](.+)/
-	//遍历数组,得到时间和歌词
-	array = array.map(function(string,index){
-		// console.log("array....")
-		// console.log(array)
-		let matches = string.match(regex)
-		// console.log("matches....")
-		// console.log(matches)
-		if (matches) {
-			return {time:matches[1],words:matches[2]}
-		}
-	})
-	console.log(11)
-	console.log(array)
-	let $lyric = $('.word')
-	array.map(function(object){
-		// 创建p标签
-		if (!object) {return}
-		let $p = $('<p/>')
-		//给每一个标签自定义时间属性,然后的文本内容是words
-		$p.attr('data-time',object.time).text(object.words)
-		//插入div
-		$p.appendTo($lyric.children('.lines'))
-	})
+function pad(num){
+	return num >= 10 ? num + '' : '0' + num
 }
+
+
+/*
+1. 这次滚动的时机
+
+ */
