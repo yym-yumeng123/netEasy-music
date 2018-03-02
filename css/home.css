@@ -280,6 +280,28 @@ section.art .copyright{
 	text-align: center; 
 	color: #999; 
 }
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+.page-hotSong .list {
+	margin-left: 28px
+}
+/*热歌数字排名*/
+.page-hotSong .num{
+	position: absolute;
+	left: -30px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 17px;
+}
+
+.page-hotSong li:nth-child(1) .hotnum,
+.page-hotSong li:nth-child(2) .hotnum,
+.page-hotSong li:nth-child(3) .hotnum{
+	color: #df3436;
+}
 
 .page-hotSong .list >li .playButton h3{
 	font-size: 17px;

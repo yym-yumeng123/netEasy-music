@@ -1,30 +1,11 @@
-
-//最新音乐加载
-// var SongObject = AV.Object.extend('Song');  // 选择表名
-// var songOBject = new SongObject();  // 生成一条数据
-// songOBject.save({
-//   name: '智商二五零',
-//   singer: '华晨宇',
-//   cover: '//i.loli.net/2017/10/08/59da11c5b94f3.jpg',
-//   url: 'http://owyvuq3lo.bkt.clouddn.com/%E6%99%BA%E5%95%86%E4%BA%8C%E4%BA%94%E9%9B%B6.m4a'
-// }).then(function(object) {
-//   alert('LeanCloud Rocks!');
-// })
-
-//推荐歌单加载数据
-// var PlayObject = AV.Object.extend('Playlist');  // 选择表名
-// var PlayOBject = new PlayObject();  // 生成一条数据
-// PlayOBject.save({
-//   title: '等你下课！',
-//   src: 'https://i.loli.net/2018/01/18/5a601088b0a59.jpg'
-// }).then(function(object) {
-//   alert('LeanCloud Rocks!');
-// })
-
 let $olSongs = $("ol#songs")
 let $songImg =$("ol#song-img") 
 let $list = $(".hotlist .list")
-// 使用数据
+// 热歌榜
+let $song = $("#olSongs")
+
+
+// 最新音乐
 var query = new AV.Query('Song');
 var cql = 'select * from Song where hotsong != true';   // CQL  查询
 AV.Query.doCloudQuery(cql).then(function (data) {
@@ -61,15 +42,18 @@ AV.Query.doCloudQuery(cql).then(function (data) {
 // 填充推荐歌单数据
 var queryS = new AV.Query('Playlist')
 queryS.find().then(function (result) {
+	console.log(result)
 	$("#songs-loading").remove()
 	for (var i = 0; i < result.length; i++) {
 		let songImg = result[i].attributes
 		let liImg = `
 			<li>
-				<div class="cover">
-					<img src="${songImg.src}" alt="我的封面">
-				</div>
-				<p>${songImg.title}</p>
+				<a href="./playlist.html?id=${result[i].id}">
+					<div class="cover">
+						<img src="${songImg.src}" alt="我的封面">
+					</div>
+					<p>${songImg.title}</p>
+				</a>
 			</li>
 		`
 		$songImg.append(liImg)
@@ -78,8 +62,7 @@ queryS.find().then(function (result) {
 	alert("获取歌曲失败")
 });
 
-// 热歌榜
-let $song = $("#olSongs")
+
 // 在线获取热歌榜
 var hotQuery = new AV.Query('Song');
 var cqh = 'select * from Song where hotsong = true';
@@ -88,27 +71,52 @@ AV.Query.doCloudQuery(cqh).then(function (data) {
     let results = data.results;
     for(var i = 0;i<results.length;i++){
         let song = results[i].attributes
-        let Li = `
-            <li>
-				<a class="playButton" href="./song.html?id=${results[i].id}">
-					<h3>${song.name}</h3>
-					<p>
-						<svg class="icon icon-sq">
-							<use xlink:href="#icon-sq"></use>
-						</svg>
-						${song.singer}-${song.name}
-					</p>
+        if (i < 9) {
+        	let Li = `
+	            <li class="clearfix">
+	            	<div class="num hotnum">0${[i+1]}</div>
+					<a class="playButton" href="./song.html?id=${results[i].id}">
+						<h3>${song.name}</h3>
+						<p>
+							<svg class="icon icon-sq">
+								<use xlink:href="#icon-sq"></use>
+							</svg>
+							${song.singer}-${song.name}
+						</p>
 						<span class="click">
-
 							<svg class="icon icon-play">
 								<use xlink:href="#icon-play"></use>
 							</svg>
 						</span>
-				</a>
-			</li>
-        `
-        $song.append(Li)
+					</a>
+				</li>
+	        `
+	        $song.append(Li)
+        }else {
+        	let Li = `
+	            <li class="clearfix">
+	            	<div class="num">${[i+1]}</div>
+					<a class="playButton" href="./song.html?id=${results[i].id}">
+						<h3>${song.name}</h3>
+						<p>
+							<svg class="icon icon-sq">
+								<use xlink:href="#icon-sq"></use>
+							</svg>
+							${song.singer}-${song.name}
+						</p>
+						<span class="click">
+							<svg class="icon icon-play">
+								<use xlink:href="#icon-play"></use>
+							</svg>
+						</span>
+					</a>
+				</li>
+	        `
+	        $song.append(Li)
+        }
     }
+}, function (error) {
+    alert('获取热门歌曲失败')
 })
 
 //搜索
@@ -173,3 +181,29 @@ query.find().then(function (results) {
 }, function (error) {
 	alert("获取歌曲失败")
 });
+
+
+
+
+
+//最新音乐加载
+// var SongObject = AV.Object.extend('Song');  // 选择表名
+// var songOBject = new SongObject();  // 生成一条数据
+// songOBject.save({
+//   name: '智商二五零',
+//   singer: '华晨宇',
+//   cover: '//i.loli.net/2017/10/08/59da11c5b94f3.jpg',
+//   url: 'http://owyvuq3lo.bkt.clouddn.com/%E6%99%BA%E5%95%86%E4%BA%8C%E4%BA%94%E9%9B%B6.m4a'
+// }).then(function(object) {
+//   alert('LeanCloud Rocks!');
+// })
+
+//推荐歌单加载数据
+// var PlayObject = AV.Object.extend('Playlist');  // 选择表名
+// var PlayOBject = new PlayObject();  // 生成一条数据
+// PlayOBject.save({
+//   title: '等你下课！',
+//   src: 'https://i.loli.net/2018/01/18/5a601088b0a59.jpg'
+// }).then(function(object) {
+//   alert('LeanCloud Rocks!');
+// })
